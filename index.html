@@ -6,8 +6,50 @@
     <title>Tictactoe</title>
     <link rel="stylesheet" href="style.css">
     <script src="javascript.js" defer></script>
+
+    <!-- link for font family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div class="header">Tictactoe</div>
+    <div class="main">
+        <div class="settings">
+            <form action="" class="form">
+                <ul>
+                    <li>
+                        <label for="player1name">Player 1: </label>
+                        <input type="text" name="player1name" id="player1name">
+                    </li>
+                    <li>
+                        <label for="player1mark">Mark: </label>
+                        <input type="text" name="player1mark" id="player1mark" maxlength="1">
+                    </li>
+                    <li>
+                        <label for="player2name">Player 2: </label>
+                        <input type="text" name="player2name" id="player2name">
+                    </li>
+                    <li>
+                        <label for="player2mark">Mark: </label>
+                        <input type="text" name="player2mark" id="player2mark" maxlength="1">
+                    </li>
+                </ul>
+                <div>Start Game</div>
+            </form>
+        </div>
+        <div class="board">
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+        </div>
+    </div>
+    <div class="footer">@ranaaaame2024</div>
 </body>
 </html>
