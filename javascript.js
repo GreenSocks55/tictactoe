@@ -31,11 +31,13 @@ let DOM = (function () {
   let startButton = document.querySelector('#startButton');
   startButton.addEventListener("click", (e) => {
     debugger;
-
       createPlayerDom();
 
       // reset board array for rendering properly
+      let status = document.querySelector('#statusDiv');
+      status.className = ``;
       game.resetBoardArray();
+      gameController.switchWon();
 
       // for dom 
       DOM.clearGrid();
@@ -149,6 +151,11 @@ let gameController = (function () {
 
   let gameWon = false;
 
+  let switchWon = function () {
+    currentTurn = 0;
+    gameWon = false;
+  }
+
   let checkWin = () => {
     for (let combination of wins) {
       let points = 0;
@@ -167,6 +174,8 @@ let gameController = (function () {
 
   // play a token
   let playTurn = (index) => {
+    debugger;
+
     if (gameWon) {
       return;
     }
@@ -198,6 +207,7 @@ let gameController = (function () {
     createPlayer,
     playTurn,
     gameWon,
+    switchWon,
   };
 })();
 
