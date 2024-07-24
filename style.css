@@ -46,6 +46,39 @@ body {
     border-radius: 1rem;
 }
 
+#statusDiv {
+    color: var(--secondary2);
+    background: var(--secondary1);
+    cursor: none;
+    border-radius: 0.25rem;
+}
+
+#statusDiv.won {
+    color: var(--secondary2);
+    box-shadow: 0.25rem 0.25rem 0.25rem var(--secondary1);
+    position: relative;
+    background: none;
+    z-index: 1;
+}
+
+#statusDiv.won::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    left: 0;
+}
+
+#statusDiv.won.player1::before {
+    background-color: var(--primary1);
+}
+
+#statusDiv.won.player2::before {
+    background-color: var(--primary2);
+}
+
 .settings {
     background: linear-gradient(#7bdbec, #dcf7d6);
 
@@ -54,6 +87,14 @@ body {
     align-items: center;
 
     font-size: 1.5rem;
+}
+
+.form > div {
+    transition: all 200ms ease-in-out;
+}
+
+.form > div:hover {
+    transform: scale(1.1);
 }
 
 .main .form {
@@ -90,7 +131,7 @@ ul li {
 ul input {
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 0.25rem 0.3rem;
+    padding: 0.25rem 0.3rem 0.1rem;
     outline: none;
     border: none;
     box-shadow: 0.15rem 0.15rem 0.15rem var(--secondary1);
@@ -129,6 +170,10 @@ ul input {
 }
 
 .square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
     border-radius: 0.5rem;
     border-right: 0.25rem solid black;
@@ -137,6 +182,29 @@ ul input {
     transition: all 200ms ease-in;
 }
 
+.square > span {
+    pointer-events: none;
+    font-size: 8rem;
+}
+
 .square:hover {
     transform: scale(1.1);
+}
+
+@media (max-width: 1000px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 800px) {
+    .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 4fr 6fr;
+        gap: 1rem;
+    }
+
+    .settings {
+        padding: 1rem;
+    }
 }
