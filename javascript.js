@@ -16,6 +16,13 @@ let DOM = (function () {
     square.appendChild(span);
     gameboardDOM.appendChild(square);
 
+    if (value == gameController.players[0].marker) {
+      span.classList.add('red');
+    }
+    else if (value == gameController.players[1].marker) {
+      span.classList.add('blue');
+    }
+
     square.addEventListener("click", (e) => {
       gameController.playTurn(e.target.dataset.index)
     });
@@ -23,10 +30,21 @@ let DOM = (function () {
 
   let startButton = document.querySelector('#startButton');
   startButton.addEventListener("click", (e) => {
+    debugger;
+
       createPlayerDom();
+
+      // reset board array for rendering properly
+      game.resetBoardArray();
+
+      // for dom 
+      DOM.clearGrid();
+      game.makeGrid();
   });
 
   let createPlayerDom = function () {
+    gameController.players.length = 0;
+
     let player1nameInput = document.querySelector('#player1name');
     let player1markInput = document.querySelector('#player1mark');
     let player2nameInput = document.querySelector('#player2name');
@@ -39,6 +57,8 @@ let DOM = (function () {
 
     gameController.createPlayer(player1name, player1mark);
     gameController.createPlayer(player2name, player2mark);
+
+    changeStatus(`${player1name} turn to play`);
   }
 
   let changeStatus = function (value) {
@@ -68,9 +88,14 @@ let DOM = (function () {
 
 // game object to let us view and edit the gameboard
 let game = (function () {
+
   let gameBoard = [];
-  for (let i = 0; i < 9; i++) {
-    gameBoard[i] = ' ';
+
+  let resetBoardArray = function () {
+    for (let i = 0; i < 9; i++) {
+      gameBoard[i] = ' ';
+    }
+    gameController.gameWon = false;
   }
 
   let makeGrid = function () {
@@ -84,6 +109,7 @@ let game = (function () {
   return {
     gameBoard,
     makeGrid,
+    resetBoardArray,
   };
 })();
 
@@ -91,6 +117,7 @@ let game = (function () {
 let gameController = (function () {
   // making players
   let players = [];
+
   let createPlayer = (name, marker) => {
     let userPlayer = Player(name, marker);
     players.push(userPlayer);
@@ -157,13 +184,13 @@ let gameController = (function () {
     game.makeGrid();
 
     if (checkWin()) {
-      DOM.changeStatus(`GAME WON BY ${players[currentTurn].name.toUpperCase()}`);
+      DOM.changeStatus(`${players[currentTurn].name} Won !`);
       DOM.changeGameWon(currentTurn);
       return;
     };
 
     switchTurn();
-    DOM.changeStatus(`${players[currentTurn].name} turn to play`)
+    DOM.changeStatus(`${players[currentTurn].name} turn to play`);
   };
 
   return {
@@ -182,4 +209,5 @@ function Player(name, marker) {
 }
 
 DOM.createPlayerDom();
+game.resetBoardArray();
 game.makeGrid();

@@ -187,6 +187,14 @@ ul input {
     font-size: 8rem;
 }
 
+.square > span.red {
+    color: var(--primary1);
+}
+
+.square > span.blue {
+    color: var(--primary2);
+}
+
 .square:hover {
     transform: scale(1.1);
 }
